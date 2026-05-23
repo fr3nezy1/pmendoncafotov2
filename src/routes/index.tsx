@@ -117,11 +117,16 @@ function HomeVisao() {
       <style>{`
         .visao {
           position: relative;
-          min-height: 85svh;
+          padding-block: 56px;
           display: flex;
           align-items: center;
           justify-content: center;
           overflow: hidden;
+        }
+        @media (min-width: 768px) {
+          .visao {
+            padding-block: 80px;
+          }
         }
         .visao__overlay {
           position: absolute;
@@ -135,7 +140,7 @@ function HomeVisao() {
           z-index: 2;
           color: var(--color-cream);
           text-align: center;
-          padding: 24px var(--pad-x-mobile);
+          padding-inline: var(--pad-x-mobile);
           max-width: 1000px;
           display: flex;
           flex-direction: column;
@@ -261,16 +266,19 @@ const caminhos = [
   {
     tag: 'Presença · Autenticidade · Olhar',
     title: 'retratos',
+    hash: 'retratos',
     body: 'Sessões individuais ao ar livre, em uma paisagem do Rio escolhida pra você. A foto acontece no caminho.',
   },
   {
     tag: 'Cumplicidade · Toque · Afeto',
     title: 'casais',
+    hash: 'casais',
     body: 'Vocês juntos, no início da manhã, em um lugar do Rio que faça sentido pra história de vocês.',
   },
   {
     tag: 'Movimento · Ritmo · Energia',
     title: 'marcas · esporte & saúde',
+    hash: 'marcas-esporte-saude',
     body: 'Ativações de marca, eventos esportivos e ações de bem-estar. Imagens que mantêm o evento vivo depois.',
   },
 ]
@@ -313,6 +321,14 @@ function HomeCaminhos() {
         .caminhos-link:hover {
           color: var(--color-caramel);
         }
+        .caminhos-title-link {
+          display: block;
+          color: inherit;
+          transition: color 0.15s ease;
+        }
+        .caminhos-title-link:hover {
+          color: var(--color-caramel);
+        }
       `}</style>
 
       <div className="container">
@@ -326,12 +342,14 @@ function HomeCaminhos() {
               <div className="pre-title" style={{ fontSize: 12, marginBottom: 18 }}>
                 {c.tag}
               </div>
-              <h3
-                className="font-display"
-                style={{ fontSize: 'clamp(34px, 4vw, 52px)', margin: '0 0 18px', lineHeight: 0.95 }}
-              >
-                {c.title}
-              </h3>
+              <Link to="/ensaios" hash={c.hash} className="caminhos-title-link">
+                <h3
+                  className="font-display"
+                  style={{ fontSize: 'clamp(34px, 4vw, 52px)', margin: '0 0 18px', lineHeight: 0.95 }}
+                >
+                  {c.title}
+                </h3>
+              </Link>
               <p
                 style={{
                   fontSize: 16,
@@ -360,43 +378,6 @@ function HomeCaminhos() {
   )
 }
 
-// ─── HomeCta ─────────────────────────────────────────────────────────────────
-
-function HomeCta() {
-  return (
-    <section className="home-cta">
-      <style>{`
-        .home-cta {
-          padding-block: var(--section-y-mobile) calc(var(--section-y-mobile) - 16px);
-          padding-inline: var(--pad-x-mobile);
-          text-align: center;
-          border-top: 1px solid var(--color-ink-faint);
-        }
-        @media (min-width: 768px) {
-          .home-cta {
-            padding-block: var(--section-y-desktop) calc(var(--section-y-desktop) - 16px);
-            padding-inline: var(--pad-x-desktop);
-          }
-        }
-        .home-cta__btn-wrap {
-          display: flex;
-          justify-content: center;
-          margin-top: 32px;
-        }
-      `}</style>
-
-      <Reveal>
-        <SectionHead pre="Vamos marcar?" title="quero fotografar com você" align="center" />
-        <div className="home-cta__btn-wrap">
-          <Link to="/contato" className="btn">
-            Falar agora <span aria-hidden="true">→</span>
-          </Link>
-        </div>
-      </Reveal>
-    </section>
-  )
-}
-
 // ─── HomePage ─────────────────────────────────────────────────────────────────
 
 function HomePage() {
@@ -405,8 +386,10 @@ function HomePage() {
       <HomeHero />
       <HomeVisao />
       <HomeRecentes />
+      <div className="container">
+        <div style={{ borderTop: '1px solid var(--color-ink-faint)' }} />
+      </div>
       <HomeCaminhos />
-      <HomeCta />
     </main>
   )
 }

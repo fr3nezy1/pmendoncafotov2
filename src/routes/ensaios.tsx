@@ -216,8 +216,14 @@ function Carousel({ fotos, blockId }: { fotos: Foto[]; blockId: string }) {
 // ─── EnsaioBlock ─────────────────────────────────────────────────────────────
 
 function EnsaioBlock({ ensaio, index }: { ensaio: Ensaio; index: number }) {
+  const htmlId = ensaio.id === 'marcas' ? 'marcas-esporte-saude' : ensaio.id
   return (
-    <section className="section-y" id={ensaio.id} data-index={index}>
+    <section
+      className="section-y"
+      id={htmlId}
+      data-index={index}
+      style={{ scrollMarginTop: 'calc(var(--header-h) + 16px)' }}
+    >
       <style>{`
         .ensaio-block-grid {
           display: grid;
