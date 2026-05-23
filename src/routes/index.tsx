@@ -117,7 +117,7 @@ function HomeVisao() {
       <style>{`
         .visao {
           position: relative;
-          padding-block: 56px;
+          padding-block: 68px;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -125,7 +125,7 @@ function HomeVisao() {
         }
         @media (min-width: 768px) {
           .visao {
-            padding-block: 80px;
+            padding-block: 100px;
           }
         }
         .visao__overlay {
