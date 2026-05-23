@@ -1,0 +1,231 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-cream: #FAF7F2;
+  --color-ink: #1A1A1A;
+  --color-ink-soft: #2a2a2a;
+  --color-ink-mute: rgba(26, 26, 26, 0.55);
+  --color-ink-faint: rgba(26, 26, 26, 0.15);
+  --color-caramel: #C8956D;
+  --color-brown: #A67C52;
+
+  --font-display: 'Anton', 'Bebas Neue', sans-serif;
+  --font-body: 'Poppins', system-ui, sans-serif;
+
+  --pad-x-mobile: 24px;
+  --pad-x-desktop: 64px;
+  --section-y-mobile: 80px;
+  --section-y-desktop: 120px;
+  --container: 1280px;
+  --header-h: 64px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--color-ink);
+  background: var(--color-cream);
+  font-weight: 400;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+/* Typography utilities */
+.font-display {
+  font-family: var(--font-display);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.005em;
+  line-height: 1.05;
+}
+
+.font-display-lower {
+  font-family: var(--font-display);
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.005em;
+  line-height: 1.05;
+}
+
+.pre-title {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-caramel);
+}
+
+@media (min-width: 768px) {
+  .pre-title {
+    font-size: 13px;
+  }
+}
+
+.subtitle {
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--color-ink-soft);
+}
+
+@media (min-width: 768px) {
+  .subtitle {
+    font-size: 17px;
+  }
+}
+
+/* Button utilities */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--color-ink);
+  color: var(--color-cream);
+  padding: 14px 28px;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 14px;
+  letter-spacing: 0.04em;
+  border: 1.5px solid var(--color-ink);
+  border-radius: 0;
+  cursor: pointer;
+  transition: opacity 0.18s ease, transform 0.18s ease;
+}
+
+.btn:hover {
+  opacity: 0.86;
+  transform: translateY(-1px);
+}
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: transparent;
+  color: var(--color-ink);
+  padding: 14px 28px;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 14px;
+  letter-spacing: 0.04em;
+  border: 1.5px solid var(--color-ink);
+  border-radius: 0;
+  cursor: pointer;
+  transition: background 0.18s ease, color 0.18s ease;
+}
+
+.btn-ghost:hover {
+  background: var(--color-ink);
+  color: var(--color-cream);
+}
+
+/* Layout utilities */
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin: 0 auto;
+  padding-inline: var(--pad-x-mobile);
+}
+
+@media (min-width: 768px) {
+  .container {
+    padding-inline: var(--pad-x-desktop);
+  }
+}
+
+.section-y {
+  padding-block: var(--section-y-mobile);
+}
+
+@media (min-width: 768px) {
+  .section-y {
+    padding-block: var(--section-y-desktop);
+  }
+}
+
+/* Reveal animation */
+.fade-section {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.fade-section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Image utilities */
+.img-ph {
+  position: relative;
+  background: repeating-linear-gradient(
+      135deg,
+      rgba(26, 26, 26, 0.04) 0 14px,
+      rgba(26, 26, 26, 0.08) 14px 15px
+    ),
+    var(--color-cream);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.img-ph::after {
+  content: attr(data-label);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-ink-mute);
+  padding: 6px 10px;
+  background: rgba(250, 247, 242, 0.85);
+  border: 1px solid var(--color-ink-faint);
+}
+
+.img-cover {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  background: var(--color-ink);
+}
+
+.img-wrap {
+  overflow: hidden;
+  position: relative;
+  background: var(--color-ink-faint);
+}
+
+.ratio-4-5 {
+  aspect-ratio: 4 / 5;
+}
+
+.ratio-3-4 {
+  aspect-ratio: 3 / 4;
+}
+
+.ratio-1-1 {
+  aspect-ratio: 1 / 1;
+}
+
+.ratio-16-9 {
+  aspect-ratio: 16 / 9;
+}

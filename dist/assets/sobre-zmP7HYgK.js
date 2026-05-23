@@ -1,0 +1,1 @@
+import{j as e}from"./index-BbTZKZln.js";import{S as o}from"./SectionHead-uaseCp_H.js";function n(){return e.jsx("main",{className:"section-y",children:e.jsx("div",{className:"container",children:e.jsx(o,{pre:"Em construção",title:"sobre"})})})}export{n as component};
