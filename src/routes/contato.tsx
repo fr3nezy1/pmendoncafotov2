@@ -1,7 +1,8 @@
 import { useState } from 'react'
 import { createFileRoute } from '@tanstack/react-router'
-import { SectionHead } from '../components/ui/SectionHead'
+import { Img } from '../components/ui/Img'
 import { Reveal } from '../components/ui/Reveal'
+import { PHOTOS } from '../data/photos'
 
 export const Route = createFileRoute('/contato')({
   component: PageContato,
@@ -14,26 +15,66 @@ function ContatoHero() {
     <section className="contato-hero">
       <style>{`
         .contato-hero {
-          padding-block: var(--section-y-mobile) calc(var(--section-y-mobile) - 40px);
+          position: relative;
+          overflow: hidden;
+          padding-block: 72px;
           padding-inline: var(--pad-x-mobile);
         }
         @media (min-width: 768px) {
           .contato-hero {
-            padding-block: var(--section-y-desktop) calc(var(--section-y-desktop) - 40px);
+            padding-block: 100px;
             padding-inline: var(--pad-x-desktop);
           }
         }
+        .contato-hero__overlay {
+          position: absolute;
+          top: 0; left: 0; right: 0; bottom: 0;
+          background:
+            radial-gradient(ellipse at center, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.82) 90%),
+            rgba(0,0,0,0.2);
+        }
+        .contato-hero__inner {
+          position: relative;
+          z-index: 1;
+        }
       `}</style>
 
-      <div className="container" style={{ paddingInline: 0 }}>
+      {/* TODO: substituir por foto Cloudinary do Pedro */}
+      <Img
+        src={PHOTOS.contatoHero}
+        alt="Sessão fotográfica no Rio de Janeiro em luz natural"
+        style={{
+          position: 'absolute',
+          top: 0, left: 0, right: 0, bottom: 0,
+          width: '100%', height: '100%',
+          objectFit: 'cover',
+        }}
+      />
+      <div className="contato-hero__overlay" />
+
+      <div className="container contato-hero__inner" style={{ paddingInline: 0 }}>
         <Reveal>
-          <SectionHead
-            pre="Vamos marcar?"
-            title="me fala um pouco sobre você"
-            subtitle="Em até 24h chamo no WhatsApp pra continuarmos. Sem robô, sem formulário automático."
-            align="center"
-            maxWidth={560}
-          />
+          <div>
+            <div className="pre-title" style={{ marginBottom: 14 }}>
+              Vamos marcar?
+            </div>
+            <h1
+              className="font-display"
+              style={{
+                fontSize: 'clamp(48px, 7.6vw, 104px)',
+                margin: '0 0 12px',
+                color: 'var(--color-cream)',
+              }}
+            >
+              me fala um pouco sobre você
+            </h1>
+            <p
+              className="subtitle"
+              style={{ color: 'var(--color-cream)', maxWidth: 520, margin: 0 }}
+            >
+              Em até 24h chamo no WhatsApp pra continuarmos. Sem robô, sem formulário automático.
+            </p>
+          </div>
         </Reveal>
       </div>
     </section>
@@ -109,10 +150,16 @@ function ContatoForm() {
           background: var(--color-cream);
           border: 1px solid var(--color-ink-faint);
           border-radius: 0;
-          padding: 12px 14px;
           outline: none;
           transition: border-color 0.18s;
           width: 100%;
+        }
+        .form-field input,
+        .form-field select {
+          padding: 10px 14px;
+        }
+        .form-field textarea {
+          padding: 12px 14px;
         }
         .form-field input:focus,
         .form-field select:focus,
@@ -259,134 +306,6 @@ function ContatoForm() {
   )
 }
 
-// ─── ContatoFaixa ─────────────────────────────────────────────────────────────
-
-function ContatoFaixa() {
-  return (
-    <section className="contato-faixa">
-      <style>{`
-        .contato-faixa {
-          background: var(--color-ink);
-          color: var(--color-cream);
-          padding-block: 64px;
-          padding-inline: var(--pad-x-mobile);
-        }
-        @media (min-width: 768px) {
-          .contato-faixa {
-            padding-block: 80px;
-            padding-inline: var(--pad-x-desktop);
-          }
-        }
-        .contato-vias {
-          display: grid;
-          grid-template-columns: 1fr;
-          gap: 32px;
-        }
-        @media (min-width: 480px) {
-          .contato-vias {
-            grid-template-columns: repeat(2, 1fr);
-          }
-        }
-        @media (min-width: 768px) {
-          .contato-vias {
-            grid-template-columns: repeat(4, 1fr);
-          }
-        }
-        .contato-via {
-          display: flex;
-          flex-direction: column;
-          padding: 24px 0;
-          border-top: 1px solid rgba(250, 247, 242, 0.18);
-          text-decoration: none;
-          transition: opacity 0.18s;
-          color: var(--color-cream);
-        }
-        .contato-via:hover { opacity: 0.7; }
-        .contato-via .pre-title {
-          color: var(--color-caramel);
-          margin-bottom: 14px;
-        }
-        .contato-via__label {
-          font-family: var(--font-display);
-          text-transform: uppercase;
-          font-size: clamp(24px, 3vw, 32px);
-          line-height: 1;
-          margin-bottom: 12px;
-          color: var(--color-cream);
-          word-break: break-word;
-        }
-        .contato-via__sub {
-          font-size: 14px;
-          color: rgba(250, 247, 242, 0.7);
-          line-height: 1.5;
-        }
-      `}</style>
-
-      <div className="container" style={{ paddingInline: 0 }}>
-        <Reveal>
-          <div className="pre-title" style={{ color: 'var(--color-caramel)', textAlign: 'center', marginBottom: 12 }}>
-            Outras formas
-          </div>
-          <h2
-            className="font-display"
-            style={{
-              textAlign: 'center',
-              color: 'var(--color-cream)',
-              fontSize: 'clamp(32px, 4.5vw, 48px)',
-              margin: '0 0 48px',
-            }}
-          >
-            fala comigo direto
-          </h2>
-
-          <div className="contato-vias">
-            {/* WhatsApp */}
-            <a
-              href="https://wa.me/55XXXXXXXXXXX" // TODO: substituir pelo número real do Pedro quando profissional estiver pronto
-              target="_blank"
-              rel="noopener noreferrer"
-              className="contato-via"
-            >
-              <div className="pre-title">Mensagem rápida</div>
-              <div className="contato-via__label">WhatsApp</div>
-              <span className="contato-via__sub">Resposta em até 24h</span>
-            </a>
-
-            {/* Instagram */}
-            <a
-              href="https://instagram.com/drope.png"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="contato-via"
-            >
-              <div className="pre-title">Veja meu dia-a-dia</div>
-              <div className="contato-via__label">@drope.png</div>
-              <span className="contato-via__sub">DM aberto</span>
-            </a>
-
-            {/* E-mail */}
-            <a
-              href="mailto:contato@pmendoncafoto.com.br"
-              className="contato-via"
-            >
-              <div className="pre-title">Para projetos e orçamentos</div>
-              <div className="contato-via__label">E-mail</div>
-              <span className="contato-via__sub">contato@pmendoncafoto.com.br</span>
-            </a>
-
-            {/* Localização — não é link */}
-            <div className="contato-via" style={{ cursor: 'default' }}>
-              <div className="pre-title">Onde fotografo</div>
-              <div className="contato-via__label">Rio de Janeiro</div>
-              <span className="contato-via__sub">e arredores, sob consulta</span>
-            </div>
-          </div>
-        </Reveal>
-      </div>
-    </section>
-  )
-}
-
 // ─── PageContato ─────────────────────────────────────────────────────────────
 
 function PageContato() {
@@ -394,7 +313,6 @@ function PageContato() {
     <main>
       <ContatoHero />
       <ContatoForm />
-      <ContatoFaixa />
     </main>
   )
 }

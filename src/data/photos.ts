@@ -18,6 +18,10 @@ export const PHOTOS = {
   rec8: UNSPLASH('photo-1530549387789-4c1017266635'),
   // TODO: substituir por foto colorida do Pedro em ambiente (Cloudinary)
   pedro: UNSPLASH('photo-1500648767791-00dcc994a43e', 1400),
+  // TODO: substituir por foto de abertura dos ensaios (Cloudinary)
+  ensaiosHero: UNSPLASH('photo-1516239482977-b550ba7253f2', 1800),
+  // TODO: substituir por foto de abertura do contato (Cloudinary)
+  contatoHero: UNSPLASH('photo-1476514525535-07fb3b4ae5f1', 1800),
   // Ensaios — Retratos
   retrato1: UNSPLASH('photo-1488161628813-04466f872be2'),
   retrato2: UNSPLASH('photo-1517841905240-472988babdf9'),
