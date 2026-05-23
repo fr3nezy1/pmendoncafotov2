@@ -1,8 +1,6 @@
 import { useState } from 'react'
 import { createFileRoute } from '@tanstack/react-router'
-import { Img } from '../components/ui/Img'
 import { Reveal } from '../components/ui/Reveal'
-import { PHOTOS } from '../data/photos'
 
 export const Route = createFileRoute('/contato')({
   component: PageContato,
@@ -15,64 +13,34 @@ function ContatoHero() {
     <section className="contato-hero">
       <style>{`
         .contato-hero {
-          position: relative;
-          overflow: hidden;
-          padding-block: 72px;
+          padding-block: 56px;
           padding-inline: var(--pad-x-mobile);
         }
         @media (min-width: 768px) {
           .contato-hero {
-            padding-block: 100px;
+            padding-block: 80px;
             padding-inline: var(--pad-x-desktop);
           }
         }
-        .contato-hero__overlay {
-          position: absolute;
-          top: 0; left: 0; right: 0; bottom: 0;
-          background:
-            radial-gradient(ellipse at center, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.82) 90%),
-            rgba(0,0,0,0.2);
-        }
-        .contato-hero__inner {
-          position: relative;
-          z-index: 1;
-        }
       `}</style>
 
-      {/* TODO: substituir por foto Cloudinary do Pedro */}
-      <Img
-        src={PHOTOS.contatoHero}
-        alt="Sessão fotográfica no Rio de Janeiro em luz natural"
-        style={{
-          position: 'absolute',
-          top: 0, left: 0, right: 0, bottom: 0,
-          width: '100%', height: '100%',
-          objectFit: 'cover',
-        }}
-      />
-      <div className="contato-hero__overlay" />
-
-      <div className="container contato-hero__inner" style={{ paddingInline: 0 }}>
+      <div className="container" style={{ paddingInline: 0 }}>
         <Reveal>
           <div>
             <div className="pre-title" style={{ marginBottom: 14 }}>
-              Vamos marcar?
+              Contato
             </div>
             <h1
               className="font-display"
               style={{
                 fontSize: 'clamp(48px, 7.6vw, 104px)',
                 margin: '0 0 12px',
-                color: 'var(--color-cream)',
               }}
             >
-              me fala um pouco sobre você
+              vamos combinar
             </h1>
-            <p
-              className="subtitle"
-              style={{ color: 'var(--color-cream)', maxWidth: 520, margin: 0 }}
-            >
-              Em até 24h chamo no WhatsApp pra continuarmos. Sem robô, sem formulário automático.
+            <p className="subtitle" style={{ maxWidth: 520, margin: 0 }}>
+              Em até 24h chamo no WhatsApp pra continuarmos.
             </p>
           </div>
         </Reveal>
