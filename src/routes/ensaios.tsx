@@ -1,6 +1,6 @@
-import { useState, useRef } from 'react'
+import { useState, useRef, Fragment } from 'react'
 import { createFileRoute, Link } from '@tanstack/react-router'
-import { SectionHead } from '../components/ui/SectionHead'
+import { Img } from '../components/ui/Img'
 import { Reveal } from '../components/ui/Reveal'
 import { PHOTOS } from '../data/photos'
 
@@ -328,64 +328,68 @@ function EnsaiosHero() {
     <section className="ensaios-hero">
       <style>{`
         .ensaios-hero {
-          padding-block: var(--section-y-mobile) calc(var(--section-y-mobile) - 32px);
+          position: relative;
+          overflow: hidden;
+          padding-block: 72px;
           padding-inline: var(--pad-x-mobile);
         }
         @media (min-width: 768px) {
           .ensaios-hero {
-            padding-block: var(--section-y-desktop) calc(var(--section-y-desktop) - 32px);
+            padding-block: 100px;
             padding-inline: var(--pad-x-desktop);
           }
         }
+        .ensaios-hero__overlay {
+          position: absolute;
+          top: 0; left: 0; right: 0; bottom: 0;
+          background:
+            radial-gradient(ellipse at center, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.82) 90%),
+            rgba(0,0,0,0.2);
+        }
+        .ensaios-hero__inner {
+          position: relative;
+          z-index: 1;
+        }
       `}</style>
 
-      <div className="container" style={{ paddingInline: 0 }}>
+      {/* TODO: substituir por foto de abertura dos ensaios (Cloudinary) */}
+      <Img
+        src={PHOTOS.ensaiosHero}
+        alt="Ensaios fotográficos no Rio de Janeiro em luz natural"
+        style={{
+          position: 'absolute',
+          top: 0, left: 0, right: 0, bottom: 0,
+          width: '100%', height: '100%',
+          objectFit: 'cover',
+        }}
+      />
+      <div className="ensaios-hero__overlay" />
+
+      <div className="container ensaios-hero__inner" style={{ paddingInline: 0 }}>
         <Reveal>
-          <SectionHead
-            pre="O que eu fotografo"
-            title="ensaios"
-            subtitle="Três caminhos. Cada um pensado pro tipo de sessão que você está imaginando."
-            maxWidth={520}
-          />
+          <div>
+            <div className="pre-title" style={{ marginBottom: 14 }}>
+              O que eu fotografo
+            </div>
+            <h1
+              className="font-display"
+              style={{
+                fontSize: 'clamp(48px, 7.6vw, 104px)',
+                margin: '0 0 12px',
+                color: 'var(--color-cream)',
+              }}
+            >
+              ensaios
+            </h1>
+            <p
+              className="subtitle"
+              style={{ color: 'var(--color-cream)', maxWidth: 520, margin: 0 }}
+            >
+              Três caminhos. Cada um pensado pro tipo de sessão que você está imaginando.
+            </p>
+          </div>
         </Reveal>
       </div>
-    </section>
-  )
-}
-
-// ─── EnsaiosCta ──────────────────────────────────────────────────────────────
-
-function EnsaiosCta() {
-  return (
-    <section className="ensaios-cta">
-      <style>{`
-        .ensaios-cta {
-          padding-block: var(--section-y-mobile) calc(var(--section-y-mobile) - 16px);
-          padding-inline: var(--pad-x-mobile);
-          text-align: center;
-          border-top: 1px solid var(--color-ink-faint);
-        }
-        @media (min-width: 768px) {
-          .ensaios-cta {
-            padding-block: var(--section-y-desktop) calc(var(--section-y-desktop) - 16px);
-            padding-inline: var(--pad-x-desktop);
-          }
-        }
-        .ensaios-cta__btn-wrap {
-          display: flex;
-          justify-content: center;
-          margin-top: 32px;
-        }
-      `}</style>
-
-      <Reveal>
-        <SectionHead pre="Vamos marcar?" title="me chama" align="center" />
-        <div className="ensaios-cta__btn-wrap">
-          <Link to="/contato" className="btn">
-            Quero fotografar com você <span aria-hidden="true">→</span>
-          </Link>
-        </div>
-      </Reveal>
     </section>
   )
 }
@@ -397,9 +401,15 @@ function PageEnsaios() {
     <main>
       <EnsaiosHero />
       {ENSAIOS_DATA.map((ensaio, i) => (
-        <EnsaioBlock key={ensaio.id} ensaio={ensaio} index={i} />
+        <Fragment key={ensaio.id}>
+          {i > 0 && (
+            <div className="container">
+              <div style={{ borderTop: '1px solid var(--color-ink-faint)' }} />
+            </div>
+          )}
+          <EnsaioBlock ensaio={ensaio} index={i} />
+        </Fragment>
       ))}
-      <EnsaiosCta />
     </main>
   )
 }
