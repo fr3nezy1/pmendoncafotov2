@@ -1,4 +1,4 @@
-import type { CSSProperties, ElementType, ReactNode } from 'react'
+import type { CSSProperties, ElementType, ReactNode, Ref } from 'react'
 import { useFadeIn } from '../../hooks/use-fade-in'
 
 interface RevealProps {
@@ -19,7 +19,7 @@ export function Reveal({ children, delay, as: Tag = 'div', className = '', style
 
   return (
     <Tag
-      ref={ref as React.Ref<HTMLElement>}
+      ref={ref as Ref<HTMLElement>}
       className={`fade-section${className ? ` ${className}` : ''}`}
       style={combined}
     >
