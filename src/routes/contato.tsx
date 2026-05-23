@@ -26,7 +26,7 @@ function ContatoHero() {
 
       <div className="container" style={{ paddingInline: 0 }}>
         <Reveal>
-          <div>
+          <div style={{ textAlign: 'center' }}>
             <div className="pre-title" style={{ marginBottom: 14 }}>
               Contato
             </div>
@@ -39,7 +39,7 @@ function ContatoHero() {
             >
               vamos combinar
             </h1>
-            <p className="subtitle" style={{ maxWidth: 520, margin: 0 }}>
+            <p className="subtitle" style={{ maxWidth: 520, margin: '0 auto' }}>
               Em até 24h chamo no WhatsApp pra continuarmos.
             </p>
           </div>
