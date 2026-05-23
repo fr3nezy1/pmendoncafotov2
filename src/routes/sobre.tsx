@@ -238,6 +238,9 @@ function PageSobre() {
   return (
     <main>
       <SobreQuem />
+      <div className="container">
+        <div style={{ borderTop: '1px solid var(--color-ink-faint)' }} />
+      </div>
       <SobreComo />
       <SobreCta />
     </main>
