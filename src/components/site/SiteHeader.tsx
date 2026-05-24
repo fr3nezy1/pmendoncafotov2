@@ -43,19 +43,17 @@ export function SiteHeader({ onOpenDrawer }: SiteHeaderProps) {
       <div
         className="inner"
         style={{
-          maxWidth: 'var(--container)',
-          margin: '0 auto',
           height: '100%',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
-          paddingInline: 'var(--pad-x-mobile)',
+          paddingInline: '10px',
         }}
       >
         <style>{`
           @media (min-width: 768px) {
             .inner {
-              padding-inline: var(--pad-x-desktop) !important;
+              padding-inline: 10px !important;
             }
             .header-nav { display: flex !important; }
             .header-burger { display: none !important; }

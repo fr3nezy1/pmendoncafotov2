@@ -109,15 +109,15 @@ function Carousel({ fotos, blockId }: { fotos: Foto[]; blockId: string }) {
     setCurrent(Math.max(0, Math.min(i, fotos.length - 1)))
   }
 
-  const foto = fotos[current]
   const atStart = current === 0
   const atEnd = current === fotos.length - 1
 
   return (
-    <div>
+    <div style={{ height: '100%' }}>
       <style>{`
         .carousel-wrap {
           position: relative;
+          height: 100%;
           aspect-ratio: 4 / 5;
           overflow: hidden;
           background: var(--color-ink);
@@ -203,12 +203,6 @@ function Carousel({ fotos, blockId }: { fotos: Foto[]; blockId: string }) {
         </button>
       </div>
 
-      <div style={{ display: 'flex', justifyContent: 'space-between', paddingTop: 12 }}>
-        <span style={{ fontSize: 12, color: 'var(--color-ink-soft)' }}>
-          {foto.cliente} · {foto.local}
-        </span>
-        <span style={{ fontSize: 12, color: 'var(--color-ink-mute)' }}>4:5</span>
-      </div>
     </div>
   )
 }
@@ -232,9 +226,9 @@ function EnsaioBlock({ ensaio, index }: { ensaio: Ensaio; index: number }) {
         }
         @media (min-width: 900px) {
           .ensaio-block-grid {
-            grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+            grid-template-columns: minmax(0, 1fr) auto;
             gap: 64px;
-            align-items: start;
+            align-items: stretch;
           }
         }
         .ensaio-card {
@@ -312,7 +306,7 @@ function EnsaioBlock({ ensaio, index }: { ensaio: Ensaio; index: number }) {
           </div>
 
           {/* Carrossel direita */}
-          <Reveal>
+          <Reveal style={{ height: '100%' }}>
             <Carousel fotos={ensaio.fotos} blockId={ensaio.id} />
           </Reveal>
         </div>
@@ -361,6 +355,7 @@ function EnsaiosHero() {
           top: 0, left: 0, right: 0, bottom: 0,
           width: '100%', height: '100%',
           objectFit: 'cover',
+          objectPosition: 'center 65%',
         }}
       />
       <div className="ensaios-hero__overlay" />
