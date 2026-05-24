@@ -62,21 +62,52 @@ function ContatoForm() {
   })
   const [sent, setSent] = useState(false)
   const [errors, setErrors] = useState<{ [k: string]: string }>({})
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitError, setSubmitError] = useState(false)
 
   const set =
     (k: string) =>
-    (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) =>
+    (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
       setData((d) => ({ ...d, [k]: e.target.value }))
+      setSubmitError(false)
+    }
 
-  const submit = (e: React.FormEvent) => {
+  const submit = async (e: React.FormEvent) => {
     e.preventDefault()
     const errs: { [k: string]: string } = {}
     if (!data.nome.trim()) errs.nome = 'Como te chamo?'
     if (!data.whatsapp.trim()) errs.whatsapp = 'Preciso de um número pra te chamar'
     setErrors(errs)
     if (Object.keys(errs).length) return
-    console.log('[Pedro Mendonça] Novo contato:', data)
-    setSent(true)
+
+    setIsSubmitting(true)
+    setSubmitError(false)
+    try {
+      const response = await fetch('https://formspree.io/f/maqkdnek', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        body: JSON.stringify({
+          nome: data.nome,
+          whatsapp: data.whatsapp,
+          email: data.email,
+          tipo: data.tipo,
+          periodo: data.periodo,
+          ideia: data.ideia,
+        }),
+      })
+      if (response.ok) {
+        setSent(true)
+      } else {
+        setSubmitError(true)
+      }
+    } catch {
+      setSubmitError(true)
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
@@ -258,13 +289,35 @@ function ContatoForm() {
                   />
                 </div>
 
-                <button
-                  type="submit"
-                  className="btn"
-                  style={{ marginTop: 12, alignSelf: 'start' }}
-                >
-                  Enviar <span aria-hidden="true">→</span>
-                </button>
+                <div style={{ marginTop: 12 }}>
+                  <button
+                    type="submit"
+                    className="btn"
+                    style={{ alignSelf: 'start' }}
+                    disabled={isSubmitting}
+                  >
+                    {isSubmitting ? 'Enviando...' : <>Enviar <span aria-hidden="true">→</span></>}
+                  </button>
+                  {submitError && (
+                    <p style={{
+                      fontFamily: 'var(--font-body)',
+                      fontSize: 14,
+                      color: 'var(--color-ink-soft)',
+                      margin: '12px 0 0',
+                      lineHeight: 1.6,
+                    }}>
+                      Algo deu errado no envio. Tenta de novo em alguns instantes ou me chama direto no Instagram{' '}
+                      <a
+                        href="https://instagram.com/drope.png"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{ color: 'var(--color-caramel)', textDecoration: 'underline' }}
+                      >
+                        @drope.png
+                      </a>
+                    </p>
+                  )}
+                </div>
               </form>
             </Reveal>
           )}
