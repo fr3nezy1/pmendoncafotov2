@@ -3,6 +3,15 @@ import { createFileRoute, Link } from '@tanstack/react-router'
 import { Reveal } from '../components/ui/Reveal'
 
 export const Route = createFileRoute('/contato')({
+  head: () => ({
+    meta: [
+      { title: 'Contato · Pedro Mendonça Fotografia' },
+      { name: 'description', content: 'Vamos marcar sua sessão? Fala comigo via WhatsApp, e-mail ou formulário. Fotógrafo lifestyle no Rio de Janeiro.' },
+    ],
+    links: [
+      { rel: 'canonical', href: 'https://pmendoncafoto.com.br/contato' },
+    ],
+  }),
   component: PageContato,
 })
 

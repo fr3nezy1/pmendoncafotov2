@@ -5,6 +5,15 @@ import { Reveal } from '../components/ui/Reveal'
 import { PHOTOS } from '../data/photos'
 
 export const Route = createFileRoute('/sobre')({
+  head: () => ({
+    meta: [
+      { title: 'Sobre · Pedro Mendonça Fotografia' },
+      { name: 'description', content: 'Fotógrafo lifestyle no Rio, focado no instante espontâneo e na luz natural. Conheça meu processo e como agendar sua sessão.' },
+    ],
+    links: [
+      { rel: 'canonical', href: 'https://pmendoncafoto.com.br/sobre' },
+    ],
+  }),
   component: PageSobre,
 })
 

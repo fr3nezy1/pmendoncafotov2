@@ -5,6 +5,15 @@ import { Reveal } from '../components/ui/Reveal'
 import { PHOTOS } from '../data/photos'
 
 export const Route = createFileRoute('/')({
+  head: () => ({
+    meta: [
+      { title: 'Pedro Mendonça · Fotógrafo lifestyle no Rio de Janeiro' },
+      { name: 'description', content: 'Ensaios, casais e ativações de marca em luz natural. Fotografia autoral no Rio de Janeiro. Sessões a partir de R$ 450.' },
+    ],
+    links: [
+      { rel: 'canonical', href: 'https://pmendoncafoto.com.br/' },
+    ],
+  }),
   component: HomePage,
 })
 
@@ -153,7 +162,6 @@ function HomeVisao() {
         }
       `}</style>
 
-      {/* TODO: substituir por foto Cloudinary do Pedro */}
       <Img
         src={PHOTOS.visao}
         alt="Rio de Janeiro ao amanhecer"
@@ -166,6 +174,7 @@ function HomeVisao() {
           width: '100%',
           height: '100%',
           objectFit: 'cover',
+          objectPosition: 'center 89%',
         }}
       />
 

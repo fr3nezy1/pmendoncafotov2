@@ -5,6 +5,15 @@ import { Reveal } from '../components/ui/Reveal'
 import { PHOTOS } from '../data/photos'
 
 export const Route = createFileRoute('/ensaios')({
+  head: () => ({
+    meta: [
+      { title: 'Ensaios · Pedro Mendonça Fotografia' },
+      { name: 'description', content: 'Sessões de retrato, casais e marcas no Rio de Janeiro. Luz natural, locações ao ar livre, edição autoral. A partir de R$ 450.' },
+    ],
+    links: [
+      { rel: 'canonical', href: 'https://pmendoncafoto.com.br/ensaios' },
+    ],
+  }),
   component: PageEnsaios,
 })
 
