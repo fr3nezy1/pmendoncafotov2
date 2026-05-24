@@ -250,7 +250,7 @@ function HomeRecentes() {
 
       <div className="container">
         <Reveal>
-          <SectionHead pre="Trabalhos recentes" title="Recentes" />
+          <SectionHead pre="O que há de novo" title="Recentes" />
         </Reveal>
 
         <div className="recentes-grid">
