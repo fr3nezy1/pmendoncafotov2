@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute, Link } from '@tanstack/react-router'
 import { Reveal } from '../components/ui/Reveal'
 
 export const Route = createFileRoute('/contato')({
@@ -51,7 +51,7 @@ function ContatoHero() {
 
 // ─── ContatoForm ─────────────────────────────────────────────────────────────
 
-function ContatoForm() {
+function ContatoForm({ sent, setSent }: { sent: boolean; setSent: (v: boolean) => void }) {
   const [data, setData] = useState({
     nome: '',
     whatsapp: '',
@@ -60,7 +60,6 @@ function ContatoForm() {
     periodo: '',
     ideia: '',
   })
-  const [sent, setSent] = useState(false)
   const [errors, setErrors] = useState<{ [k: string]: string }>({})
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitError, setSubmitError] = useState(false)
@@ -208,17 +207,9 @@ function ContatoForm() {
               <p className="contato-sent__p">
                 Em até 24h chamo no WhatsApp pra continuarmos nossa conversa.
               </p>
-              <button
-                type="button"
-                className="btn-ghost"
-                onClick={() => {
-                  setSent(false)
-                  setData({ nome: '', whatsapp: '', email: '', tipo: '', periodo: '', ideia: '' })
-                  setErrors({})
-                }}
-              >
-                Enviar outra mensagem
-              </button>
+              <Link to="/" className="btn-ghost">
+                Voltar para o site
+              </Link>
             </div>
           ) : (
             <Reveal>
@@ -330,10 +321,11 @@ function ContatoForm() {
 // ─── PageContato ─────────────────────────────────────────────────────────────
 
 function PageContato() {
+  const [sent, setSent] = useState(false)
   return (
     <main>
-      <ContatoHero />
-      <ContatoForm />
+      {!sent && <ContatoHero />}
+      <ContatoForm sent={sent} setSent={setSent} />
     </main>
   )
 }
