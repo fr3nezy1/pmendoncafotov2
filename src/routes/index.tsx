@@ -7,7 +7,7 @@ import { PHOTOS } from '../data/photos'
 export const Route = createFileRoute('/')({
   head: () => ({
     meta: [
-      { title: 'Pedro Mendonça · Fotógrafo lifestyle no Rio de Janeiro' },
+      { title: 'Pedro Mendonça · Fotografia' },
       { name: 'description', content: 'Ensaios, casais e ativações de marca em luz natural. Fotografia autoral no Rio de Janeiro. Sessões a partir de R$ 450.' },
     ],
     links: [

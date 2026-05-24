@@ -47,13 +47,13 @@ export function SiteHeader({ onOpenDrawer }: SiteHeaderProps) {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
-          paddingInline: '10px',
+          paddingInline: '30px',
         }}
       >
         <style>{`
           @media (min-width: 768px) {
             .inner {
-              padding-inline: 10px !important;
+              padding-inline: 30px !important;
             }
             .header-nav { display: flex !important; }
             .header-burger { display: none !important; }
