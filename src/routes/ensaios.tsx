@@ -117,7 +117,7 @@ function Carousel({ fotos, blockId }: { fotos: Foto[]; blockId: string }) {
       <style>{`
         .carousel-wrap {
           position: relative;
-          height: 100%;
+          width: 100%;
           aspect-ratio: 4 / 5;
           overflow: hidden;
           background: var(--color-ink);
@@ -226,7 +226,7 @@ function EnsaioBlock({ ensaio, index }: { ensaio: Ensaio; index: number }) {
         }
         @media (min-width: 900px) {
           .ensaio-block-grid {
-            grid-template-columns: minmax(0, 1fr) auto;
+            grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
             gap: 64px;
             align-items: stretch;
           }
